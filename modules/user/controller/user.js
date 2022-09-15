@@ -1,9 +1,10 @@
 import { UserModel } from "../../../DB/models/User.js";
+import {ProductModel} from '../../../DB/models/Product.js'
 import { Op } from "sequelize";
 
 export const addUser =  async (req, res) => {
     const { userName, email, password, age, address } = req.body;
-    const newUser = await userModel.create({
+    const newUser = await UserModel.create({
       userName,
       email,
       password,
@@ -15,7 +16,7 @@ export const addUser =  async (req, res) => {
 export const updateUser = async (req, res) => {
     const { id } = req.params;
     const { userName, email, password, age, address } = req.body;
-    const updatedUser = await userModel.update(
+    const updatedUser = await UserModel.update(
       { userName, email, password, age, address },
       { where: { id } }
     );
@@ -23,25 +24,25 @@ export const updateUser = async (req, res) => {
   }
 export const deleteUser =  async (req, res) => {
     const { id } = req.params;
-    const result = await userModel.destroy({
+    const result = await UserModel.destroy({
       where: { id },
     });
     res.json({ result });
   }
 export const getUserById =  async (req, res) => {
     const { id } = req.params;
-    const user = await userModel.findByPk(id, {
-      include: productModel,
+    const user = await UserModel.findByPk(id, {
+      include: ProductModel,
     });
     res.json({ user });
   }
 export const getAllUsers = async(req,res)=>{
-    const users = await userModel.findAll({include:productModel})
+    const users = await UserModel.findAll({include:productModel})
     res.json({users})
   }
 export const getAllUsersAgeBetween = async (req,res)=>{
     const {x,y} = req.params
-    const users = await userModel.findAll(
+    const users = await UserModel.findAll(
       {
         where: {
           age:{
@@ -56,7 +57,7 @@ export const getAllUsersAgeBetween = async (req,res)=>{
   }
 export const getAllUsersByName = async (req,res)=>{
     const {name} = req.query
-    const users = await userModel.findAll(
+    const users = await UserModel.findAll(
       {
         where: {
           userName:{
@@ -70,7 +71,7 @@ export const getAllUsersByName = async (req,res)=>{
   }
 export const getAllUsersAgeLessThan = async (req,res)=>{
     const {age} = req.params
-    const users = await userModel.findAll(
+    const users = await UserModel.findAll(
       {
         where: {
           age:{
@@ -84,7 +85,7 @@ export const getAllUsersAgeLessThan = async (req,res)=>{
   }
 export const getAllUsersAgeGreaterThan = async (req,res)=>{
   const {age} = req.params
-  const users = await userModel.findAll(
+  const users = await UserModel.findAll(
     {
       where: {
         age:{

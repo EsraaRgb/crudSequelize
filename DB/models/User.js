@@ -9,7 +9,7 @@ export const UserModel = sequelize.define("User", {
   email: {
     type: DataTypes.STRING,
     allowNull: false,
-    unique,
+    unique: true,
   },
   password: {
     type: DataTypes.STRING,

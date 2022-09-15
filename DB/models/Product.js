@@ -6,7 +6,7 @@ export const ProductModel = sequelize.define("Product", {
   name: {
     type: DataTypes.STRING,
     allowNull: false,
-    unique,
+    unique:true
   },
   price: {
     type: DataTypes.INTEGER,
