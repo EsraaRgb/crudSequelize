@@ -6,26 +6,26 @@ export const ProductModel = sequelize.define("Product", {
   name: {
     type: DataTypes.STRING,
     allowNull: false,
-    unique:true
+    unique: true,
   },
   price: {
     type: DataTypes.INTEGER,
     allowNull: false,
   },
-  description:{
+  description: {
     type: DataTypes.STRING,
     allowNull: false,
-  }
+  },
 });
 
-ProductModel.hasOne(UserModel,{
-    foreignKey: {
-        name: 'createdBy'
-      },
-    onDelete:'CASCADE',
-    onUpdate:'CASCADE'
-})
-UserModel.hasMany(ProductModel,{
-    onDelete:'CASCADE',
-    onUpdate:'CASCADE'
-})
+ProductModel.belongsTo(UserModel, {
+  foreignKey:"createdBy",
+  onDelete: "CASCADE",
+  onUpdate: "CASCADE",
+});
+UserModel.hasMany(ProductModel, {
+  onDelete: "CASCADE",
+  onUpdate: "CASCADE",
+});
+
+

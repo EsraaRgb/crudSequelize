@@ -32,8 +32,8 @@ export const getAllProducts = async (req, res) => {
 };
 export const getProductById = async (req, res) => {
     const { id } = req.params;
-    const product = await ProductModel.findOne({include:{UserModel,attributes:['userName','email']},where:{id}});
-  res.json(product);
+//     const product = await ProductModel.findOne({include:{UserModel,attributes:['userName','email']},where:{id}});
+//   res.json(product);
 
 };
 export const getProductByName = async (req, res) => {
